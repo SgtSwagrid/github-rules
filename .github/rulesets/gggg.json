@@ -1,0 +1,39 @@
+{
+  "name": "gggg",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": [
+        "~DEFAULT_BRANCH"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "creation"
+    },
+    {
+      "type": "required_deployments",
+      "parameters": {
+        "required_deployment_environments": []
+      }
+    }
+  ],
+  "bypass_actors": [],
+  "_links": {
+    "self": {
+      "href": "https://api.github.com/repos/SgtSwagrid/github-rules/rulesets/14650232"
+    },
+    "html": {
+      "href": "https://github.com/SgtSwagrid/github-rules/rules/14650232"
+    }
+  }
+}
