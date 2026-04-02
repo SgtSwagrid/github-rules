@@ -20,5 +20,5 @@ Every `*.json` file in `.github/rulesets` is automatically applied as a ruleset,
 
 The synchronisation is applied only in a single direction.
 Direct changes to your repository's configuration on GitHub aren't reflected in `.github/rulesets`,
-and in fact will promptly be automatically reverted to reflect the existing contents of `.github/rulesets` as the single source of truth.
+and in fact will be promptly reverted to reflect the existing contents of `.github/rulesets` as the single source of truth.
 If you wish to use GitHub's UI or API to update a ruleset, you'll need to explicitly export is as JSON when you're done and commit it to the repository.
