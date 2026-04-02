@@ -6,13 +6,13 @@ for file in .github/rulesets/*.json; do
     --jq ".[] | select(.name == \"$RULESET_NAME\") | .id" 2>/dev/null || true)
 
   if [ -n "$EXISTING_ID" ]; then
-    echo "Ruleset '$RULESET_NAME' already exists. Skipping."
+    echo "Skipping ruleset '$RULESET_NAME' because it already exists."
     continue
   fi
 
   jq 'del(._comment)' "$file" \
     | gh api "repos/$GITHUB_REPOSITORY/rulesets" --method POST --input -
 
-  echo "Ruleset '$RULESET_NAME' updated successfully."
+  echo "Imported ruleset '$RULESET_NAME'."
 
 done
