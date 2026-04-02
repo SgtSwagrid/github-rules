@@ -15,6 +15,7 @@ jobs:
 
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
       - name: Require GH_TOKEN
@@ -34,14 +35,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: bash scripts/export-rulesets.sh
 
-      - name: Commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          [ -d .github/rulesets ] && git add .github/rulesets/ || true
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "[ci]: Exported GitHub rulesets to source. [skip ci]"
-            git push
-          fi
+      - name: Open PR
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          PR_TITLE: "chore: export GitHub rulesets"
+          BASE_BRANCH: ${{ github.ref_name }}
+          SYNC_BRANCH: ci/export-rulesets
+        run: bash scripts/open-pr.sh
