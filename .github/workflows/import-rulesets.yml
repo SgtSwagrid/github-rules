@@ -37,4 +37,4 @@ jobs:
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash scripts/apply-rulesets.sh
+        run: bash scripts/import-rulesets.sh
