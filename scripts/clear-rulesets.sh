@@ -1,4 +1,4 @@
-RULESET_IDS=$(gh api "repos/${{ github.repository }}/rulesets" \
+RULESET_IDS=$(gh api "repos/$GITHUB_REPOSITORY/rulesets" \
   --jq '.[].id' 2>/dev/null || true)
 
 if [ -z "$RULESET_IDS" ]; then
@@ -7,7 +7,7 @@ if [ -z "$RULESET_IDS" ]; then
 fi
 
 for ID in $RULESET_IDS; do
-  RULESET_NAME=$(gh api "repos/${{ github.repository }}/rulesets/$ID" --jq '.name')
-  gh api "repos/${{ github.repository }}/rulesets/$ID" --method DELETE
+  RULESET_NAME=$(gh api "repos/$GITHUB_REPOSITORY/rulesets/$ID" --jq '.name')
+  gh api "repos/$GITHUB_REPOSITORY/rulesets/$ID" --method DELETE
   echo "Deleted ruleset '$RULESET_NAME'."
 done
