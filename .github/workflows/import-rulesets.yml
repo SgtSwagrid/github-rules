@@ -2,6 +2,8 @@ name: Import rulesets
 
 on:
   push:
+    branches:
+      - $default-branch
     paths:
       - .github/rulesets/**
   workflow_dispatch:
