@@ -5,6 +5,7 @@ if [ -z "$RULESETS" ] || [ "$RULESETS" = "[]" ]; then
   exit 0
 fi
 
+rm -rf .github/rulesets
 mkdir -p .github/rulesets
 
 echo "$RULESETS" | jq -c '.[]' | while read -r RULESET; do
