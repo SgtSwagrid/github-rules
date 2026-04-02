@@ -1,0 +1,34 @@
+name: Rulesets
+
+on:
+  push:
+  workflow_dispatch:
+
+# Cancel in-progress runs when starting a new one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  rulesets:
+    name: Rulesets
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Require GH_TOKEN
+        id: require-gh-token
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::GH_TOKEN secret is not set. Create a GitHub Personal Access Token and add it as a repository secret named GH_TOKEN."
+            exit 1
+          fi
+
+      - name: Apply rulesets
+        id: apply-rulesets
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: bash .github-rules/scripts/apply-rulesets.sh
