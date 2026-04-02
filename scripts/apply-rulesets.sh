@@ -14,4 +14,5 @@ for file in .github/rulesets/*.json; do
     | gh api "repos/${{ github.repository }}/rulesets" --method POST --input -
 
   echo "Ruleset '$RULESET_NAME' updated successfully."
+
 done
