@@ -40,5 +40,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           PR_TITLE: "chore: export GitHub rulesets"
           BASE_BRANCH: ${{ github.ref_name }}
-          SYNC_BRANCH: ci/export-rulesets
+          UPDATE_BRANCH: ci/export-rulesets
         run: bash scripts/open-pr.sh

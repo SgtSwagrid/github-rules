@@ -7,7 +7,7 @@ set -euo pipefail
 # Environment variables:
 #   - PR_TITLE:    The title for the pull request.
 #   - BASE_BRANCH: The branch into which we wish to merge.
-#   - SYNC_BRANCH: The name of the temporary branch used to stage the pull request.
+#   - UPDATE_BRANCH: The name of the temporary branch used to stage the pull request.
 #
 # Requirements:
 #   - templates/pull-request-body.md should contain the pull request body template.
@@ -22,11 +22,11 @@ PR_BODY=$(cat templates/pull-request-body.md)
 
 git config user.name  "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
-git checkout -B "$SYNC_BRANCH"
+git checkout -B "$UPDATE_BRANCH"
 [ -d .github/rulesets ] && git add .github/rulesets/ || true
 
 # =================================================================================================
-# 1. If something has changed, commit and push the changes to SYNC_BRANCH.
+# 1. If something has changed, commit and push the changes to UPDATE_BRANCH.
 # =================================================================================================
 
 if git diff --cached --quiet; then
@@ -36,7 +36,7 @@ if git diff --cached --quiet; then
 else
 
   git commit -m "$PR_TITLE"
-  git push --force origin "$SYNC_BRANCH"
+  git push --force origin "$UPDATE_BRANCH"
 
   # =================================================================================================
   # 2. Open a new pull request if there isn't one already.
@@ -47,7 +47,7 @@ else
   # Determine whether there already exists a PR.
   pr_exists=$(gh pr list \
     --repo "$GITHUB_REPOSITORY" \
-    --head "$SYNC_BRANCH" \
+    --head "$UPDATE_BRANCH" \
     --state open \
     --json number \
     --jq 'length > 0')
@@ -56,7 +56,7 @@ else
   if [[ "$pr_exists" == "false" ]]; then
     gh pr create \
       --repo "$GITHUB_REPOSITORY" \
-      --head "$SYNC_BRANCH" \
+      --head "$UPDATE_BRANCH" \
       --base "$BASE_BRANCH" \
       --title "$PR_TITLE" \
       --body "$PR_BODY"
