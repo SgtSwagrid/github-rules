@@ -1,7 +1,9 @@
-name: Rulesets
+name: Import rulesets
 
 on:
   push:
+    paths:
+      - .github/rulesets/**
   workflow_dispatch:
 
 # Cancel in-progress runs when starting a new one.
@@ -10,15 +12,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
-  rulesets:
-    name: Rulesets
+  apply-rulesets:
+    name: Import rulesets
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Require GH_TOKEN
-        id: require-gh-token
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -27,8 +26,15 @@ jobs:
             exit 1
           fi
 
-      - name: Apply rulesets
-        id: apply-rulesets
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Clear
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash .github-rules/scripts/apply-rulesets.sh
+        run: bash scripts/clear-rulesets.sh
+
+      - name: Sync
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: bash scripts/apply-rulesets.sh
