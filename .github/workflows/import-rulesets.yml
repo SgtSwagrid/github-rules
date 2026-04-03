@@ -27,6 +27,9 @@ jobs:
       github.ref_name == github.event.repository.default_branch
     env:
       RULESETS_DIR: .github/rulesets
+    defaults:
+      run:
+        working-directory: repo
 
     steps:
       - name: Requirements
@@ -42,19 +45,21 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          path: repo
 
       - name: Checkout github-rules
         uses: actions/checkout@v4
         with:
           repository: SgtSwagrid/github-rules
-          path: ${{ runner.temp }}/github-rules
+          path: github-rules
 
       - name: Clear
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash "$RUNNER_TEMP/github-rules/scripts/clear-rulesets.sh"
+        run: bash ../github-rules/scripts/clear-rulesets.sh
 
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash "$RUNNER_TEMP/github-rules/scripts/import-rulesets.sh"
+        run: bash ../github-rules/scripts/import-rulesets.sh

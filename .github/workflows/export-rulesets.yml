@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RULESETS_DIR: .github/rulesets
+    defaults:
+      run:
+        working-directory: repo
 
     permissions:
       contents: write
@@ -38,17 +41,19 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          path: repo
 
       - name: Checkout github-rules
         uses: actions/checkout@v4
         with:
           repository: SgtSwagrid/github-rules
-          path: ${{ runner.temp }}/github-rules
+          path: github-rules
 
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash "$RUNNER_TEMP/github-rules/scripts/export-rulesets.sh"
+        run: bash ../github-rules/scripts/export-rulesets.sh
 
       - name: Publish
         env:
@@ -56,5 +61,5 @@ jobs:
           BASE_BRANCH: ${{ github.ref_name }}
           UPDATE_BRANCH: ci/export-rulesets
           PR_TITLE: "[ci] Exported GitHub rulesets to source."
-          PR_BODY_FILE: ${{ runner.temp }}/github-rules/templates/pull-request-body.md
-        run: bash "$RUNNER_TEMP/github-rules/scripts/publish.sh"
+          PR_BODY_FILE: ../github-rules/templates/pull-request-body.md
+        run: bash ../github-rules/scripts/publish.sh
