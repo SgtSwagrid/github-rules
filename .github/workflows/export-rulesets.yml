@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RULESETS_DIR: .github/rulesets
-      GITHUB_RULES_DIR: ${{ runner.temp }}/github-rules
 
     permissions:
       contents: write
@@ -50,7 +49,7 @@ jobs:
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash "$GITHUB_RULES_DIR/scripts/export-rulesets.sh"
+        run: bash "$RUNNER_TEMP/github-rules/scripts/export-rulesets.sh"
 
       - name: Publish
         env:
@@ -59,4 +58,4 @@ jobs:
           UPDATE_BRANCH: ci/export-rulesets
           PR_TITLE: "[ci] Exported GitHub rulesets to source."
           PR_BODY_FILE: ${{ runner.temp }}/github-rules/templates/pull-request-body.md
-        run: bash "$GITHUB_RULES_DIR/scripts/publish.sh"
+        run: bash "$RUNNER_TEMP/github-rules/scripts/publish.sh"

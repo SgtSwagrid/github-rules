@@ -28,7 +28,6 @@ jobs:
       github.ref_name == github.event.repository.default_branch
     env:
       RULESETS_DIR: .github/rulesets
-      GITHUB_RULES_DIR: ${{ runner.temp }}/github-rules
 
     steps:
       - name: Requirements
@@ -54,9 +53,9 @@ jobs:
       - name: Clear
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash "$GITHUB_RULES_DIR/scripts/clear-rulesets.sh"
+        run: bash "$RUNNER_TEMP/github-rules/scripts/clear-rulesets.sh"
 
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash "$GITHUB_RULES_DIR/scripts/import-rulesets.sh"
+        run: bash "$RUNNER_TEMP/github-rules/scripts/import-rulesets.sh"
