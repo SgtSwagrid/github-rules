@@ -25,7 +25,7 @@ echo "$RULESETS" | jq -c '.[]' | while read -r RULESET; do
   RULESET_NAME=$(echo "$RULESET" | jq -r '.name')
 
   gh api "repos/$GITHUB_REPOSITORY/rulesets/$ID" \
-    | jq 'del(.id, .source, .source_type, .created_at, .updated_at, .links, .node_id, .current_user_can_bypass)' \
+    | jq 'del(.id, .source, .source_type, .created_at, .updated_at, .links, ._links, .node_id, .current_user_can_bypass)' \
     > "$RULESETS_DIR/$RULESET_NAME.json"
 
   echo "Exported ruleset '$RULESET_NAME'."
