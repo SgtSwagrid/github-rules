@@ -33,7 +33,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync:
+  import:
     uses: SgtSwagrid/github-rules/.github/workflows/import-rulesets.yml@main
     secrets: inherit
 ```
@@ -46,7 +46,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync:
+  export:
     uses: SgtSwagrid/github-rules/.github/workflows/export-rulesets.yml@main
     secrets: inherit
 ```
