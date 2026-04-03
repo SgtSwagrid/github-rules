@@ -7,6 +7,7 @@ name: Export Rulesets
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 # Cancel in-progress runs when starting a new one.
 concurrency:
@@ -19,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RULESETS_DIR: .github/rulesets
+      GITHUB_RULES_DIR: ${{ runner.temp }}/github-rules
 
     permissions:
       contents: write
@@ -39,10 +41,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout github-rules
+        uses: actions/checkout@v4
+        with:
+          repository: SgtSwagrid/github-rules
+          path: ${{ runner.temp }}/github-rules
+
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash scripts/export-rulesets.sh
+        run: bash "$GITHUB_RULES_DIR/scripts/export-rulesets.sh"
 
       - name: Publish
         env:
@@ -50,5 +58,5 @@ jobs:
           BASE_BRANCH: ${{ github.ref_name }}
           UPDATE_BRANCH: ci/export-rulesets
           PR_TITLE: "[ci] Exported GitHub rulesets to source."
-          PR_BODY_FILE: templates/pull-request-body.md
-        run: bash scripts/publish.sh
+          PR_BODY_FILE: ${{ runner.temp }}/github-rules/templates/pull-request-body.md
+        run: bash "$GITHUB_RULES_DIR/scripts/publish.sh"
