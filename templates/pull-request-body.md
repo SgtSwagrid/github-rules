@@ -6,7 +6,7 @@ As a result, the versions in `$RULESETS_DIR` have become out-of-sync.
 
 ### Trigger
 
-This pull request was triggered manually, through the [Export Rulesets](https://github.com/SgtSwagrid/github-rules/.github/workflows/export-rulesets.yml) workflow.
+This pull request was triggered manually, through the [Export Rulesets](https://github.com/SgtSwagrid/github-rules/blob/.github/workflows/export-rulesets.yml) workflow.
 It is advised that this _always_ be done following any manual ruleset change.
 
 ### Warning
