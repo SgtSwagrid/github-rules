@@ -26,13 +26,11 @@ jobs:
       github.event_name == 'workflow_call' ||
       github.ref_name == github.event.repository.default_branch
     env:
-      RULESETS_DIR: .github/rulesets
-    defaults:
-      run:
-        working-directory: repo
+      REPO_DIR: repo
+      RULESETS_DIR: repo/.github/rulesets
 
     steps:
-      - name: Requirements
+      - name: Check requirements
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -57,9 +55,9 @@ jobs:
       - name: Clear
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash ../github-rules/scripts/clear-rulesets.sh
+        run: bash github-rules/scripts/clear-rulesets.sh
 
       - name: Sync
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash ../github-rules/scripts/import-rulesets.sh
+        run: bash github-rules/scripts/import-rulesets.sh

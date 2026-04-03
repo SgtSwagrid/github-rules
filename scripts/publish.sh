@@ -6,6 +6,7 @@ set -euo pipefail
 #
 # Environment variables:
 #   - GH_TOKEN:      GitHub token with permission to create pull requests.
+#   - REPO_DIR:      Path to the repository to commit and open a pull request in.
 #   - BASE_BRANCH:   The branch into which we wish to merge.
 #   - UPDATE_BRANCH: The name of the temporary branch used to stage the pull request.
 #   - PR_TITLE:      The title for the pull request.
@@ -17,21 +18,21 @@ set -euo pipefail
 PR_TITLE=$(echo "$PR_TITLE" | envsubst)
 PR_BODY=$(envsubst < "$PR_BODY_FILE")
 
-git config user.name  "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
-git switch -C "$UPDATE_BRANCH"
-git add -A
+git -C "$REPO_DIR" config user.name  "github-actions[bot]"
+git -C "$REPO_DIR" config user.email "github-actions[bot]@users.noreply.github.com"
+git -C "$REPO_DIR" switch -C "$UPDATE_BRANCH"
+git -C "$REPO_DIR" add -A
 
 # 1. If something has changed, commit and push the changes to UPDATE_BRANCH.
 
-if git diff --cached --quiet; then
+if git -C "$REPO_DIR" diff --cached --quiet; then
 
   echo "No changes to commit."
 
 else
 
-  git commit -m "$PR_TITLE"
-  git push --force origin "$UPDATE_BRANCH"
+  git -C "$REPO_DIR" commit -m "$PR_TITLE"
+  git -C "$REPO_DIR" push --force origin "$UPDATE_BRANCH"
 
   # 2. Open a new pull request if there isn't one already.
   #    If the last pull request from us hasn't yet been merged,
