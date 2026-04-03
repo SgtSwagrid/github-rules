@@ -63,6 +63,18 @@ You can manage your tokens [here](https://github.com/settings/personal-access-to
 Once created, add it as a repository secret named `GH_TOKEN` under:
 > **Settings → Secrets and variables → Actions → New repository secret**
 
+## 🔨 Usage
+
+Rulesets can be manually created under:
+> **Settings → Rules → Rulesets**
+
+From the **Actions** tab on GitHub, you can run the `Export Rulesets` workflow to export your rulesets to `.github/rulesets`.
+Conversely, ruleset files which are added to this directory (on the default branch) are automatically imported whenever this directory is updated.
+
+### New repositories
+
+Imports run before `GH_TOKEN` is added will fail, in which case you may need to run `Import Rulesets` manually once to load the initial state.
+
 ## 🚩 Limitations
 
 The synchronisation is only automatic in a single direction.
