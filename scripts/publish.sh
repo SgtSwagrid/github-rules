@@ -14,7 +14,7 @@ set -euo pipefail
 
 # 0. Setup
 
-PR_BODY=$(cat "$PR_BODY_FILE")
+PR_BODY=$(envsubst < "$PR_BODY_FILE")
 
 git config user.name  "github-actions[bot]"
 git config user.email "github-actions[bot]@users.noreply.github.com"
