@@ -1,6 +1,6 @@
 <div align="center">
   <h1>⚖️ GitHub Rules</h1>
-  <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> in source. </p>
+  <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> in-source. </p>
 </div>
 
 ## 🚨 Problem
@@ -12,13 +12,14 @@ It is possible to export/import rules in JSON format, but this isn't as seemless
 
 ## 💡 Solution
 
-_GitHub Rules_ instead supports a workflow whereby _all_ rulesets are defined exclusively in source.
-Every `*.json` file in `.github/rulesets` is automatically applied as a ruleset, and is kept in sync by a GitHub action watching for changes.
-
+_GitHub Rules_ instead supports a workflow whereby _all_ rulesets are defined exclusively in-source.
+Every `*.json` file in `.github/rulesets` is automatically applied as a ruleset, and is kept in sync by a GitHub workflow watching for changes.
+The link is bidirectional; manual changes to the configuration can also be exported.
 
 ## 🚩 Limitations
 
-The synchronisation is applied only in a single direction.
-Direct changes to your repository's configuration on GitHub aren't reflected in `.github/rulesets`,
-and in fact will be promptly reverted to reflect the existing contents of `.github/rulesets` as the single source of truth.
-If you wish to use GitHub's UI or API to update a ruleset, you'll need to explicitly export is as JSON when you're done and commit it to the repository.
+The synchronisation is only automatic in a single direction.
+Direct changes to your repository's configuration on GitHub aren't reflected in `.github/rulesets`
+until you manually run the `Export Rulesets` workflow.
+This is because ruleset changes can't serve as a workflow trigger.
+Pushes to the `.github/rulsets` directory on the default branch in the interim will cause all manual changes to be reverted.
