@@ -1,4 +1,9 @@
-name: Import rulesets
+# =================================================================================================
+# Imports rules from '.github/rulesets' into GitHub's internal configuration.
+# Triggered by modifications to this directory on the default branch, or manually.
+# =================================================================================================
+
+name: Import Rulesets
 
 on:
   push:
@@ -12,18 +17,23 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  apply-rulesets:
-    name: Import rulesets
+  run:
+    name: Run
     runs-on: ubuntu-latest
-    if: github.ref_name == github.event.repository.default_branch
+    # Only respond to changes on the default branch.
+    if: github.event_name == 'workflow_dispatch' || github.ref_name == github.event.repository.default_branch
+    env:
+      RULESETS_DIR: .github/rulesets
 
     steps:
-      - name: Require GH_TOKEN
+      - name: Requirements
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           if [ -z "$GH_TOKEN" ]; then
-            echo "::error::GH_TOKEN secret is not set. Create a GitHub Personal Access Token and add it as a repository secret named GH_TOKEN."
+            echo "::error::GH_TOKEN secret is not set." \
+              "Create a GitHub Personal Access Token with sufficient access" \
+              "and add it as a repository secret named GH_TOKEN."
             exit 1
           fi
 

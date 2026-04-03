@@ -1,4 +1,9 @@
-name: Export rulesets
+# =================================================================================================
+# Exports rules from GitHub's internal configuration into '.github/rulesets'.
+# Only triggered manually, which should be done following every manual configuration change.
+# =================================================================================================
+
+name: Export Rulesets
 
 on:
   workflow_dispatch:
@@ -9,21 +14,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  export-rulesets:
-    name: Export rulesets
+  run:
+    name: Run
     runs-on: ubuntu-latest
+    env:
+      RULESETS_DIR: .github/rulesets
 
     permissions:
       contents: write
       pull-requests: write
 
     steps:
-      - name: Require GH_TOKEN
+      - name: Requirements
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           if [ -z "$GH_TOKEN" ]; then
-            echo "::error::GH_TOKEN secret is not set. Create a GitHub Personal Access Token and add it as a repository secret named GH_TOKEN."
+            echo "::error::GH_TOKEN secret is not set." \
+              "Create a GitHub Personal Access Token with sufficient access" \
+              "and add it as a repository secret named GH_TOKEN."
             exit 1
           fi
 
@@ -35,10 +44,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: bash scripts/export-rulesets.sh
 
-      - name: Open PR
+      - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          PR_TITLE: "[ci] Exported GitHub rulesets to source."
           BASE_BRANCH: ${{ github.ref_name }}
           UPDATE_BRANCH: ci/export-rulesets
-        run: bash scripts/open-pr.sh
+          PR_TITLE: "[ci] Exported GitHub rulesets to source."
+          PR_BODY_FILE: templates/pull-request-body.md
+        run: bash scripts/publish.sh

@@ -1,4 +1,16 @@
-for file in .github/rulesets/*.json; do
+#!/usr/bin/env bash
+set -euo pipefail
+
+# =================================================================================================
+# Imports rulesets from RULESETS_DIR into GitHub's internal configuration.
+#
+# Environment variables:
+#   - GH_TOKEN:     GitHub token with permission to manage rulesets.
+#   - RULESETS_DIR: Path to the directory containing ruleset JSON files.
+# =================================================================================================
+
+
+for file in "$RULESETS_DIR"/*.json; do
 
   RULESET_NAME=$(jq -r '.name' "$file")
 
