@@ -19,7 +19,6 @@ concurrency:
 
 jobs:
   run:
-    name: Run
     runs-on: ubuntu-latest
     # Only respond to changes on the default branch.
     if: >
