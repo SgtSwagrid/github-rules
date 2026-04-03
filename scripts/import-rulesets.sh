@@ -10,6 +10,7 @@ set -euo pipefail
 # =================================================================================================
 
 
+shopt -s nullglob
 for file in "$RULESETS_DIR"/*.json; do
 
   RULESET_NAME=$(jq -r '.name' "$file")
