@@ -16,7 +16,6 @@ concurrency:
 
 jobs:
   run:
-    name: Run
     runs-on: ubuntu-latest
     env:
       RULESETS_DIR: .github/rulesets
