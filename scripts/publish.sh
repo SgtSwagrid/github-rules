@@ -14,6 +14,7 @@ set -euo pipefail
 
 # 0. Setup
 
+PR_TITLE=$(echo "$PR_TITLE" | envsubst)
 PR_BODY=$(envsubst < "$PR_BODY_FILE")
 
 git config user.name  "github-actions[bot]"
