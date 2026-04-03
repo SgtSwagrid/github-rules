@@ -11,7 +11,7 @@ for file in .github/rulesets/*.json; do
   fi
 
   jq 'del(._comment)' "$file" \
-    | gh api "repos/$GITHUB_REPOSITORY/rulesets" --method POST --input -
+    | gh api "repos/$GITHUB_REPOSITORY/rulesets" --method POST --input - > /dev/null
 
   echo "Imported ruleset '$RULESET_NAME'."
 
