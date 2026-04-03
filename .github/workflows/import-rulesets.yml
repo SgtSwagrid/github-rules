@@ -2,8 +2,6 @@ name: Import rulesets
 
 on:
   push:
-    branches:
-      - $default-branch
     paths:
       - .github/rulesets/**
   workflow_dispatch:
@@ -17,6 +15,7 @@ jobs:
   apply-rulesets:
     name: Import rulesets
     runs-on: ubuntu-latest
+    if: github.ref_name == github.event.repository.default_branch
 
     steps:
       - name: Require GH_TOKEN
