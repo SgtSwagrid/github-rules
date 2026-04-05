@@ -1,63 +1,8 @@
-# =================================================================================================
-# Exports rules from GitHub's internal configuration into '.github/rulesets'.
-# Only triggered manually, which should be done following every manual configuration change.
-# =================================================================================================
-
 name: Export Rulesets
-
 on:
   workflow_dispatch:
-  workflow_call:
-
-# Cancel in-progress runs when starting a new one.
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
-    env:
-      REPO_DIR: repo
-      RULESETS_DIR: repo/.github/rulesets
-
-    permissions:
-      contents: write
-      pull-requests: write
-
-    steps:
-      - name: Check requirements
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          if [ -z "$GH_TOKEN" ]; then
-            echo "::error::GH_TOKEN secret is not set." \
-              "Create a GitHub Personal Access Token with sufficient access" \
-              "and add it as a repository secret named GH_TOKEN."
-            exit 1
-          fi
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          path: repo
-
-      - name: Checkout github-rules
-        uses: actions/checkout@v4
-        with:
-          repository: SgtSwagrid/github-rules
-          path: github-rules
-
-      - name: Sync
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: bash github-rules/scripts/export-rulesets.sh
-
-      - name: Publish
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          BASE_BRANCH: ${{ github.ref_name }}
-          UPDATE_BRANCH: ci/export-rulesets
-          PR_TITLE: "[ci] Exported GitHub rulesets to source."
-          PR_BODY_FILE: github-rules/templates/pull-request-body.md
-        run: bash github-rules/scripts/publish.sh
+  export:
+    uses: SgtSwagrid/github-rules/.github/workflows/export-rulesets.yml@main
+    secrets: inherit
