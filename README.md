@@ -85,5 +85,5 @@ Pushes to the `.github/rulesets` directory on the default branch in the interim 
 
 ## 👁️ See also
 
-- [GitHub Graph](https://github.com/SgtSwagrid/github-graph) is a tool to duplicate files across multiple GitHub repositories.
-- This project is configured by [Git Config](https://github.com/SgtSwagrid/git-config).
+- See [GitHub Graph](https://github.com/SgtSwagrid/github-graph) for a similar a tool to duplicate files across multiple GitHub repositories.
+- This project is configured by [Git Config](https://github.com/SgtSwagrid/git-config), using the above.
