@@ -25,7 +25,6 @@ jq -n \
     allow_merge_commit:              $r.allow_merge_commit,
     allow_rebase_merge:              $r.allow_rebase_merge,
     allow_auto_merge:                $r.allow_auto_merge,
-    allow_forking:                   $r.allow_forking,
     allow_update_branch:             $r.allow_update_branch,
     delete_branch_on_merge:          $r.delete_branch_on_merge,
     web_commit_signoff_required:     $r.web_commit_signoff_required,

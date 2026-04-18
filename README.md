@@ -82,7 +82,6 @@ Conversely, changes to these files on the default branch are automatically impor
 | `allow_merge_commit` | boolean | Allow merging pull requests with a merge commit. |
 | `allow_rebase_merge` | boolean | Allow rebase-merging pull requests. |
 | `allow_auto_merge` | boolean | Allow auto-merge on pull requests. |
-| `allow_forking` | boolean | Allow forking of the repository. |
 | `allow_update_branch` | boolean | Show an "Update branch" button on pull requests. |
 | `delete_branch_on_merge` | boolean | Automatically delete head branches after a pull request is merged. |
 | `web_commit_signoff_required` | boolean | Require contributors to sign off on commits made via the web editor. |
