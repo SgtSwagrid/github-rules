@@ -15,8 +15,13 @@ if [ ! -f "$SETTINGS_FILE" ]; then
   exit 0
 fi
 
-REPO=$(jq 'del(._comment) | del(.actions_enabled, .actions_allowed, .actions_default_workflow_permissions, .actions_can_approve_pull_request_reviews) | with_entries(select(.value != null))' "$SETTINGS_FILE")
-echo "Importing repository settings: $REPO"
+REPO=$(jq '
+  del(._comment, .actions_enabled, .actions_allowed, .actions_default_workflow_permissions, .actions_can_approve_pull_request_reviews) |
+  if .allow_squash_merge == false then del(.squash_merge_commit_title, .squash_merge_commit_message) else . end |
+  if .allow_merge_commit == false then del(.merge_commit_title, .merge_commit_message) else . end |
+  with_entries(select(.value != null))
+' "$SETTINGS_FILE")
+echo "Importing repository settings..."
 echo "$REPO" | gh api "repos/$GITHUB_REPOSITORY" --method PATCH --input - > /dev/null
 
 ACTIONS_PERMISSIONS=$(jq '{enabled: .actions_enabled, allowed_actions: .actions_allowed} | with_entries(select(.value != null))' "$SETTINGS_FILE")
