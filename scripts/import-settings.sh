@@ -16,7 +16,7 @@ if [ ! -f "$SETTINGS_FILE" ]; then
 fi
 
 REPO=$(jq 'del(._comment) | del(.actions_enabled, .actions_allowed, .actions_default_workflow_permissions, .actions_can_approve_pull_request_reviews) | with_entries(select(.value != null))' "$SETTINGS_FILE")
-echo "Importing repository settings..."
+echo "Importing repository settings: $REPO"
 echo "$REPO" | gh api "repos/$GITHUB_REPOSITORY" --method PATCH --input - > /dev/null
 
 ACTIONS_PERMISSIONS=$(jq '{enabled: .actions_enabled, allowed_actions: .actions_allowed} | with_entries(select(.value != null))' "$SETTINGS_FILE")
