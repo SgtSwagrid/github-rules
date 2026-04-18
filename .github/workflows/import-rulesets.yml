@@ -1,6 +1,7 @@
 # =================================================================================================
-# Imports rules from '.github/rulesets' into GitHub's internal configuration.
-# Triggered by modifications to this directory on the default branch, or manually.
+# Imports rules and settings from '.github/rulesets' and '.github/settings.json' into GitHub's
+# internal configuration. Triggered by modifications to these paths on the default branch, or
+# manually.
 # =================================================================================================
 
 name: Import Rulesets
@@ -9,6 +10,7 @@ on:
   push:
     paths:
       - .github/rulesets/**
+      - .github/settings.json
   workflow_dispatch:
   workflow_call:
 
@@ -28,6 +30,7 @@ jobs:
     env:
       REPO_DIR: repo
       RULESETS_DIR: repo/.github/rulesets
+      SETTINGS_FILE: repo/.github/settings.json
 
     steps:
       - name: Check requirements
@@ -52,12 +55,17 @@ jobs:
           repository: SgtSwagrid/github-rules
           path: github-rules
 
-      - name: Clear
+      - name: Clear Rulesets
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: bash github-rules/scripts/clear-rulesets.sh
 
-      - name: Sync
+      - name: Sync Rulesets
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: bash github-rules/scripts/import-rulesets.sh
+
+      - name: Sync Settings
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: bash github-rules/scripts/import-settings.sh

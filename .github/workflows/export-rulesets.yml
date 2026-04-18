@@ -1,6 +1,7 @@
 # =================================================================================================
-# Exports rules from GitHub's internal configuration into '.github/rulesets'.
-# Only triggered manually, which should be done following every manual configuration change.
+# Exports rules and settings from GitHub's internal configuration into '.github/rulesets' and
+# '.github/settings.json'. Only triggered manually, which should be done following every manual
+# configuration change.
 # =================================================================================================
 
 name: Export Rulesets
@@ -20,6 +21,7 @@ jobs:
     env:
       REPO_DIR: repo
       RULESETS_DIR: repo/.github/rulesets
+      SETTINGS_FILE: repo/.github/settings.json
 
     permissions:
       contents: write
@@ -48,10 +50,15 @@ jobs:
           repository: SgtSwagrid/github-rules
           path: github-rules
 
-      - name: Sync
+      - name: Sync Rulesets
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: bash github-rules/scripts/export-rulesets.sh
+
+      - name: Sync Settings
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: bash github-rules/scripts/export-settings.sh
 
       - name: Publish
         env:
