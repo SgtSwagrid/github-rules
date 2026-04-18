@@ -85,7 +85,11 @@ Conversely, changes to these files on the default branch are automatically impor
   "allow_forking": true,
   "allow_update_branch": false,
   "delete_branch_on_merge": false,
-  "web_commit_signoff_required": false
+  "web_commit_signoff_required": false,
+  "squash_merge_commit_title": "PR_TITLE",
+  "squash_merge_commit_message": "PR_BODY",
+  "merge_commit_title": "PR_TITLE",
+  "merge_commit_message": "PR_BODY"
 }
 ```
 

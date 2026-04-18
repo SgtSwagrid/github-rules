@@ -21,7 +21,11 @@ gh api "repos/$GITHUB_REPOSITORY" \
       allow_forking,
       allow_update_branch,
       delete_branch_on_merge,
-      web_commit_signoff_required
+      web_commit_signoff_required,
+      squash_merge_commit_title,
+      squash_merge_commit_message,
+      merge_commit_title,
+      merge_commit_message
     }' \
   > "$SETTINGS_FILE"
 
