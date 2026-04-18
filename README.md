@@ -1,6 +1,6 @@
 <div align="center">
   <h1>⚖️ GitHub Rules</h1>
-  <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> in-source. </p>
+  <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> in-source.</p>
 </div>
 
 ## 🚨 Problem
