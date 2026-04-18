@@ -2,7 +2,7 @@
 
 The rulesets associated with this repository were manually updated.
 As a result, the versions in `$RULESETS_DIR` have become out-of-sync.
-[github-rules](https://github.com/SgtSwagrid/github-rules) has exported the changes to `$RULESETS_DIR`, so that the in-source versions can remain the single source-of-truth.
+[GitHub Rules](https://github.com/SgtSwagrid/github-rules) has exported the changes to `$RULESETS_DIR`, so that the in-source versions can remain the single source-of-truth.
 
 ### Trigger
 
