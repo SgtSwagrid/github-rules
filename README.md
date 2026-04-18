@@ -76,22 +76,24 @@ Conversely, changes to these files on the default branch are automatically impor
 
 `.github/settings.json` supports the following fields (all optional):
 
-```json
-{
-  "allow_squash_merge": true,
-  "allow_merge_commit": true,
-  "allow_rebase_merge": true,
-  "allow_auto_merge": false,
-  "allow_forking": true,
-  "allow_update_branch": false,
-  "delete_branch_on_merge": false,
-  "web_commit_signoff_required": false,
-  "squash_merge_commit_title": "PR_TITLE",
-  "squash_merge_commit_message": "PR_BODY",
-  "merge_commit_title": "PR_TITLE",
-  "merge_commit_message": "PR_BODY"
-}
-```
+| Field | Type | Description |
+|-------|------|-------------|
+| `allow_squash_merge` | boolean | Allow squash-merging pull requests. |
+| `allow_merge_commit` | boolean | Allow merging pull requests with a merge commit. |
+| `allow_rebase_merge` | boolean | Allow rebase-merging pull requests. |
+| `allow_auto_merge` | boolean | Allow auto-merge on pull requests. |
+| `allow_forking` | boolean | Allow forking of the repository. |
+| `allow_update_branch` | boolean | Show an "Update branch" button on pull requests. |
+| `delete_branch_on_merge` | boolean | Automatically delete head branches after a pull request is merged. |
+| `web_commit_signoff_required` | boolean | Require contributors to sign off on commits made via the web editor. |
+| `squash_merge_commit_title` | `"PR_TITLE"` \| `"COMMIT_OR_PR_TITLE"` | Default title for squash merge commits. |
+| `squash_merge_commit_message` | `"PR_BODY"` \| `"COMMIT_MESSAGES"` \| `"BLANK"` | Default message for squash merge commits. |
+| `merge_commit_title` | `"PR_TITLE"` \| `"MERGE_MESSAGE"` | Default title for merge commits. |
+| `merge_commit_message` | `"PR_BODY"` \| `"PR_TITLE"` \| `"BLANK"` | Default message for merge commits. |
+| `actions_enabled` | boolean | Enable GitHub Actions for the repository. |
+| `actions_allowed` | `"all"` \| `"local_only"` \| `"selected"` | Which actions are permitted to run. |
+| `actions_default_workflow_permissions` | `"read"` \| `"write"` | Default permissions granted to the `GITHUB_TOKEN`. |
+| `actions_can_approve_pull_request_reviews` | boolean | Allow GitHub Actions to approve pull requests. |
 
 ### New repositories
 

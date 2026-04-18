@@ -69,3 +69,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: bash github-rules/scripts/import-settings.sh
+
