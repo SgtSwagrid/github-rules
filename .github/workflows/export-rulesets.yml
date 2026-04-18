@@ -65,6 +65,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           BASE_BRANCH: ${{ github.ref_name }}
           UPDATE_BRANCH: ci/export-rulesets
-          PR_TITLE: "[ci] Exported GitHub rulesets to source."
+          PR_TITLE: "[github-rules] Exported GitHub rulesets to source."
           PR_BODY_FILE: github-rules/templates/pull-request-body.md
         run: bash github-rules/scripts/publish.sh
