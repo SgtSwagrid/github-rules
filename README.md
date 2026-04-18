@@ -1,6 +1,6 @@
 <div align="center">
   <h1>⚖️ GitHub Rules</h1>
-  <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> and <a href="https://docs.github.com/en/rest/repos/repos#update-a-repository">settings</a> in-source. </p>
+  <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> and <a href="https://docs.github.com/en/rest/repos/repos#update-a-repository">settings</a> in-source.</p>
 </div>
 
 ## 🚨 Problem
@@ -87,4 +87,4 @@ Pushes to these files on the default branch in the interim will cause any manual
 ## 👁️ See also
 
 - See [GitHub Graph](https://github.com/SgtSwagrid/github-graph) for a similar a tool to duplicate files across multiple GitHub repositories.
-- This project is configured by [Git Config](https://github.com/SgtSwagrid/git-config), using the above.
+- This project is configured by [GitHub Config](https://github.com/SgtSwagrid/github-config), using the above.
