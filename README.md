@@ -78,24 +78,14 @@ Conversely, changes to these files on the default branch are automatically impor
 
 ```json
 {
-  "description": "My repository description.",
-  "homepage": "https://example.com",
-  "has_issues": true,
-  "has_projects": true,
-  "has_wiki": true,
-  "has_discussions": false,
   "allow_squash_merge": true,
   "allow_merge_commit": true,
   "allow_rebase_merge": true,
   "allow_auto_merge": false,
-  "allow_forking": false,
-  "allow_update_branch": true,
+  "allow_forking": true,
+  "allow_update_branch": false,
   "delete_branch_on_merge": false,
-  "web_commit_signoff_required": false,
-  "squash_merge_commit_title": "PR_TITLE",
-  "squash_merge_commit_message": "PR_BODY",
-  "merge_commit_title": "PR_TITLE",
-  "merge_commit_message": "PR_BODY"
+  "web_commit_signoff_required": false
 }
 ```
 
