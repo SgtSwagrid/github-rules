@@ -66,6 +66,11 @@ Once created, add it as a repository secret named `GH_TOKEN` under:
 
 ## 🔨 Usage
 
+There are two separate kinds of configuration, _rulesets_ and _settings_.
+Every `*.json` file in `.github/rulesets` is automatically applied as a ruleset, and `.github/settings.json` defines repository-level settings.
+
+### Rulesets
+
 Rulesets can be manually created under:
 > **Settings → Rules → Rulesets**
 
