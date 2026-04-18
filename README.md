@@ -72,6 +72,33 @@ Rulesets can be manually created under:
 From the **Actions** tab on GitHub, you can run the `Export Rulesets` workflow to export your rulesets to `.github/rulesets` and your settings to `.github/settings.json`.
 Conversely, changes to these files on the default branch are automatically imported.
 
+### Settings
+
+`.github/settings.json` supports the following fields (all optional):
+
+```json
+{
+  "description": "My repository description.",
+  "homepage": "https://example.com",
+  "has_issues": true,
+  "has_projects": true,
+  "has_wiki": true,
+  "has_discussions": false,
+  "allow_squash_merge": true,
+  "allow_merge_commit": true,
+  "allow_rebase_merge": true,
+  "allow_auto_merge": false,
+  "allow_forking": false,
+  "allow_update_branch": true,
+  "delete_branch_on_merge": false,
+  "web_commit_signoff_required": false,
+  "squash_merge_commit_title": "PR_TITLE",
+  "squash_merge_commit_message": "PR_BODY",
+  "merge_commit_title": "PR_TITLE",
+  "merge_commit_message": "PR_BODY"
+}
+```
+
 ### New repositories
 
 Imports run before `GH_TOKEN` is added will fail, in which case you may need to run `Import Rulesets` manually once to load the initial state.
