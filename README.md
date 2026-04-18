@@ -14,7 +14,7 @@ It is possible to export/import rules in JSON format, but this isn't as seemless
 
 _GitHub Rules_ instead supports a workflow whereby _all_ rulesets and settings are defined exclusively in-source.
 Every `*.json` file in `.github/rulesets` is automatically applied as a ruleset, and `.github/settings.json` defines repository-level settings.
-Both are kept in sync by a GitHub workflow watching for changes, and the link is bidirectional — manual changes to the configuration can also be exported back to source.
+Both are kept in sync by a GitHub workflow watching for changes, and the link is bidirectional; manual changes to the configuration can also be exported back to source.
 
 ## ⬇️ Installation
 
