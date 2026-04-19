@@ -3,6 +3,12 @@
   <p>A tool to define GitHub <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository">rulesets</a> and <a href="https://docs.github.com/en/rest/repos/repos#update-a-repository">settings</a> in-source.</p>
 </div>
 
+<br/><br/>
+
+> "What is not written does not exist." — (Legal Proverb)
+
+<br/>
+
 ## 🚨 Problem
 
 GitHub rulesets define how different people are allowed to interact with specific branches and tags, and repository settings control features such as merge strategies, PR behaviour, and wikis.
