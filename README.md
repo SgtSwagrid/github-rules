@@ -5,7 +5,7 @@
 
 <br/><br/>
 
-> "What is not written does not exist." — (Legal Proverb)
+> "What is not written does not exist." — (Legal Proverb).
 
 <br/>
 
